@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blackghos Zone</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1db954;
+    }
+
+    .playlist {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .track {
+      background: #1e1e1e;
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 16px;
+      color: #1db954;
+    }
+
+    .artist {
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      background: #1db954;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1ed760;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Blackghos Zone 🎶</h1>
+
+  <div class="playlist" id="playlist"></div>
+
+  <script>
+    // 🔧 AJOUTE ICI TES CHANSONS PERSONNELLES (fichier mp3 dans le même dossier)
+    const tracks = [
+      {
+        title: "Binôme",
+        artist: "Blackghost",
+        file: "Music/BINOME.mp3"
+      },
+    ];
+
+    const playlistContainer = document.getElementById("playlist");
+
+    tracks.forEach((track) => {
+      const trackElement = document.createElement("div");
+      trackElement.className = "track";
+
+      trackElement.innerHTML = `
+        <div class="info">
+          <div class="title">${track.title}</div>
+          <div class="artist">${track.artist}</div>
+        </div>
+        <div class="buttons">
+          <button onclick="telecharger('${track.file}', '${track.title}.mp3')">Télécharger</button>
+        </div>
+      `;
+
+      playlistContainer.appendChild(trackElement);
+    });
+
+    function telecharger(fichier, nomFichier) {
+      const lien = document.createElement('a');
+      lien.href = fichier;
+      lien.download = nomFichier;
+      document.body.appendChild(lien);
+      lien.click();
+      document.body.removeChild(lien);
+    }
+  </script>
+
+</body>
+</html>
